@@ -1,0 +1,160 @@
+{
+    "description": "Config contains the configuration and detailed condition status for the Samples Operator.\n\nCompatibility level 1: Stable within a major release for a minimum of 12 months or 3 minor releases (whichever is longer).",
+    "properties": {
+        "apiVersion": {
+            "description": "APIVersion defines the versioned schema of this representation of an object.\nServers should convert recognized schemas to the latest internal value, and\nmay reject unrecognized values.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+            "type": "string"
+        },
+        "kind": {
+            "description": "Kind is a string value representing the REST resource this object represents.\nServers may infer this from the endpoint the client submits requests to.\nCannot be updated.\nIn CamelCase.\nMore info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+            "type": "string"
+        },
+        "metadata": {
+            "type": "object"
+        },
+        "spec": {
+            "description": "ConfigSpec contains the desired configuration and state for the Samples Operator, controlling\nvarious behavior around the imagestreams and templates it creates/updates in the\nopenshift namespace.",
+            "properties": {
+                "architectures": {
+                    "description": "architectures determine which hardware architecture(s) to install, where x86_64, ppc64le, and s390x are the only\nsupported choices currently.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "managementState": {
+                    "description": "managementState is top level on/off type of switch for all operators.\nWhen \"Managed\", this operator processes config and manipulates the samples accordingly.\nWhen \"Unmanaged\", this operator ignores any updates to the resources it watches.\nWhen \"Removed\", it reacts that same wasy as it does if the Config object\nis deleted, meaning any ImageStreams or Templates it manages (i.e. it honors the skipped\nlists) and the registry secret are deleted, along with the ConfigMap in the operator's\nnamespace that represents the last config used to manipulate the samples,",
+                    "pattern": "^(Managed|Unmanaged|Force|Removed)$",
+                    "type": "string"
+                },
+                "samplesRegistry": {
+                    "description": "samplesRegistry allows for the specification of which registry is accessed\nby the ImageStreams for their image content.  Defaults on the content in https://github.com/openshift/library\nthat are pulled into this github repository, but based on our pulling only ocp content it typically\ndefaults to registry.redhat.io.",
+                    "type": "string"
+                },
+                "skippedHelmCharts": {
+                    "description": "skippedHelmCharts specifies names of helm charts that should NOT be\nmanaged. Admins can use this to allow them to delete content\nthey don’t want. They will still have to MANUALLY DELETE the\ncontent but the operator will not recreate(or update) anything\nlisted here. Few examples of the name of helmcharts which can be skipped are\n'redhat-redhat-perl-imagestreams','redhat-redhat-nodejs-imagestreams','redhat-nginx-imagestreams',\n'redhat-redhat-ruby-imagestreams','redhat-redhat-python-imagestreams','redhat-redhat-php-imagestreams',\n'redhat-httpd-imagestreams','redhat-redhat-dotnet-imagestreams'. Rest of the names can be obtained from\nopenshift console --> helmcharts -->installed helmcharts. This will display the list of all the\n12 helmcharts(of imagestreams)being installed by Samples Operator. The skippedHelmCharts must be a\nvalid Kubernetes resource name. May contain only lowercase alphanumeric characters, hyphens and periods,\nand each period separated segment must begin and end with an alphanumeric character. It must be non-empty\nand at most 253 characters in length",
+                    "items": {
+                        "description": "HelmChartName is a string alias that is used to represent the name of a helm chart.",
+                        "maxLength": 253,
+                        "minLength": 1,
+                        "type": "string"
+                    },
+                    "maxItems": 16,
+                    "type": "array",
+                    "x-kubernetes-list-type": "set",
+                    "x-kubernetes-validations": [
+                        {
+                            "message": "skippedHelmCharts must be a valid Kubernetes resource name. May contain only lowercase alphanumeric characters, hyphens and periods, and each period separated segment must begin and end with an alphanumeric character",
+                            "rule": "self.all(x, x.matches('^[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$'))"
+                        }
+                    ]
+                },
+                "skippedImagestreams": {
+                    "description": "skippedImagestreams specifies names of image streams that should NOT be\ncreated/updated.  Admins can use this to allow them to delete content\nthey don’t want.  They will still have to manually delete the\ncontent but the operator will not recreate(or update) anything\nlisted here.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "skippedTemplates": {
+                    "description": "skippedTemplates specifies names of templates that should NOT be\ncreated/updated.  Admins can use this to allow them to delete content\nthey don’t want.  They will still have to manually delete the\ncontent but the operator will not recreate(or update) anything\nlisted here.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "type": "object",
+            "additionalProperties": false
+        },
+        "status": {
+            "description": "ConfigStatus contains the actual configuration in effect, as well as various details\nthat describe the state of the Samples Operator.",
+            "properties": {
+                "architectures": {
+                    "description": "architectures determine which hardware architecture(s) to install, where x86_64 and ppc64le are the\nsupported choices.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "conditions": {
+                    "description": "conditions represents the available maintenance status of the sample\nimagestreams and templates.",
+                    "items": {
+                        "description": "ConfigCondition captures various conditions of the Config\nas entries are processed.",
+                        "properties": {
+                            "lastTransitionTime": {
+                                "description": "lastTransitionTime is the last time the condition transitioned from one status to another.",
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "lastUpdateTime": {
+                                "description": "lastUpdateTime is the last time this condition was updated.",
+                                "format": "date-time",
+                                "type": "string"
+                            },
+                            "message": {
+                                "description": "message is a human readable message indicating details about the transition.",
+                                "type": "string"
+                            },
+                            "reason": {
+                                "description": "reason is what caused the condition's last transition.",
+                                "type": "string"
+                            },
+                            "status": {
+                                "description": "status of the condition, one of True, False, Unknown.",
+                                "type": "string"
+                            },
+                            "type": {
+                                "description": "type of condition.",
+                                "type": "string"
+                            }
+                        },
+                        "required": [
+                            "status",
+                            "type"
+                        ],
+                        "type": "object",
+                        "additionalProperties": false
+                    },
+                    "type": "array"
+                },
+                "managementState": {
+                    "description": "managementState reflects the current operational status of the on/off switch for\nthe operator.  This operator compares the ManagementState as part of determining that we are turning\nthe operator back on (i.e. \"Managed\") when it was previously \"Unmanaged\".",
+                    "pattern": "^(Managed|Unmanaged|Force|Removed)$",
+                    "type": "string"
+                },
+                "samplesRegistry": {
+                    "description": "samplesRegistry allows for the specification of which registry is accessed\nby the ImageStreams for their image content.  Defaults on the content in https://github.com/openshift/library\nthat are pulled into this github repository, but based on our pulling only ocp content it typically\ndefaults to registry.redhat.io.",
+                    "type": "string"
+                },
+                "skippedImagestreams": {
+                    "description": "skippedImagestreams specifies names of image streams that should NOT be\ncreated/updated.  Admins can use this to allow them to delete content\nthey don’t want.  They will still have to manually delete the\ncontent but the operator will not recreate(or update) anything\nlisted here.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "skippedTemplates": {
+                    "description": "skippedTemplates specifies names of templates that should NOT be\ncreated/updated.  Admins can use this to allow them to delete content\nthey don’t want.  They will still have to manually delete the\ncontent but the operator will not recreate(or update) anything\nlisted here.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "version": {
+                    "description": "version is the value of the operator's payload based version indicator when it was last successfully processed",
+                    "type": "string"
+                }
+            },
+            "type": "object",
+            "additionalProperties": false
+        }
+    },
+    "required": [
+        "metadata",
+        "spec"
+    ],
+    "type": "object",
+    "additionalProperties": false,
+    "$schema": "http://json-schema.org/draft-04/schema#"
+}
