@@ -21,8 +21,7 @@
                                 "path": {
                                     "maxLength": 0
                                 }
-                            },
-                            "additionalProperties": false
+                            }
                         },
                         {
                             "properties": {
@@ -31,8 +30,7 @@
                                         null
                                     ]
                                 }
-                            },
-                            "additionalProperties": false
+                            }
                         },
                         {
                             "not": {
@@ -44,11 +42,9 @@
                                                     "passthrough"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         }
                     ]
@@ -61,8 +57,7 @@
                                     "host": {
                                         "maxLength": 0
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         },
                         {
@@ -73,8 +68,7 @@
                                             "Subdomain"
                                         ]
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         }
                     ]
@@ -114,8 +108,7 @@
                             "kind",
                             "name"
                         ],
-                        "type": "object",
-                        "additionalProperties": false
+                        "type": "object"
                     },
                     "maxItems": 3,
                     "type": "array",
@@ -158,8 +151,7 @@
                                                         "required": [
                                                             "value"
                                                         ],
-                                                        "type": "object",
-                                                        "additionalProperties": false
+                                                        "type": "object"
                                                     },
                                                     "type": {
                                                         "description": "type defines the type of the action to be applied on the header.\nPossible values are Set or Delete.\nSet allows you to set HTTP request and response headers.\nDelete allows you to delete HTTP request and response headers.",
@@ -179,8 +171,7 @@
                                                         "message": "set is required when type is Set, and forbidden otherwise",
                                                         "rule": "has(self.type) && self.type == 'Set' ?  has(self.set) : !has(self.set)"
                                                     }
-                                                ],
-                                                "additionalProperties": false
+                                                ]
                                             },
                                             "name": {
                                                 "description": "name specifies the name of a header on which to perform an action. Its value must be a valid HTTP header\nname as defined in RFC 2616 section 4.2.\nThe name must consist only of alphanumeric and the following special characters, \"-!#$%&'*+.^_`\".\nThe following header names are reserved and may not be modified via this API:\nStrict-Transport-Security, Proxy, Cookie, Set-Cookie.\nIt must be no more than 255 characters in length.\nHeader name must be unique.",
@@ -212,8 +203,7 @@
                                             "action",
                                             "name"
                                         ],
-                                        "type": "object",
-                                        "additionalProperties": false
+                                        "type": "object"
                                     },
                                     "maxItems": 20,
                                     "type": "array",
@@ -249,8 +239,7 @@
                                                         "required": [
                                                             "value"
                                                         ],
-                                                        "type": "object",
-                                                        "additionalProperties": false
+                                                        "type": "object"
                                                     },
                                                     "type": {
                                                         "description": "type defines the type of the action to be applied on the header.\nPossible values are Set or Delete.\nSet allows you to set HTTP request and response headers.\nDelete allows you to delete HTTP request and response headers.",
@@ -270,8 +259,7 @@
                                                         "message": "set is required when type is Set, and forbidden otherwise",
                                                         "rule": "has(self.type) && self.type == 'Set' ?  has(self.set) : !has(self.set)"
                                                     }
-                                                ],
-                                                "additionalProperties": false
+                                                ]
                                             },
                                             "name": {
                                                 "description": "name specifies the name of a header on which to perform an action. Its value must be a valid HTTP header\nname as defined in RFC 2616 section 4.2.\nThe name must consist only of alphanumeric and the following special characters, \"-!#$%&'*+.^_`\".\nThe following header names are reserved and may not be modified via this API:\nStrict-Transport-Security, Proxy, Cookie, Set-Cookie.\nIt must be no more than 255 characters in length.\nHeader name must be unique.",
@@ -303,8 +291,7 @@
                                             "action",
                                             "name"
                                         ],
-                                        "type": "object",
-                                        "additionalProperties": false
+                                        "type": "object"
                                     },
                                     "maxItems": 20,
                                     "type": "array",
@@ -320,12 +307,10 @@
                                     ]
                                 }
                             },
-                            "type": "object",
-                            "additionalProperties": false
+                            "type": "object"
                         }
                     },
-                    "type": "object",
-                    "additionalProperties": false
+                    "type": "object"
                 },
                 "path": {
                     "description": "path that the router watches for, to route traffic for to the service. Optional",
@@ -359,8 +344,7 @@
                     "required": [
                         "targetPort"
                     ],
-                    "type": "object",
-                    "additionalProperties": false
+                    "type": "object"
                 },
                 "subdomain": {
                     "description": "subdomain is a DNS subdomain that is requested within the ingress controller's\ndomain (as a subdomain). If host is set this field is ignored. An ingress\ncontroller may choose to ignore this suggested name, in which case the controller\nwill report the assigned name in the status.ingress array or refuse to admit the\nroute. If this value is set and the server does not support this field host will\nbe populated automatically. Otherwise host is left empty. The field may have\nmultiple parts separated by a dot, but not all ingress controllers may honor\nthe request. This field may not be changed after creation except by a user with\nthe update routes/custom-host permission.\n\nExample: subdomain `frontend` automatically receives the router subdomain\n`apps.mycluster.com` to have a full hostname `frontend.apps.mycluster.com`.",
@@ -386,8 +370,7 @@
                                         "key": {
                                             "maxLength": 0
                                         }
-                                    },
-                                    "additionalProperties": false
+                                    }
                                 },
                                 {
                                     "not": {
@@ -397,8 +380,7 @@
                                                     "passthrough"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
                                 }
                             ]
@@ -410,8 +392,7 @@
                                         "destinationCACertificate": {
                                             "maxLength": 0
                                         }
-                                    },
-                                    "additionalProperties": false
+                                    }
                                 },
                                 {
                                     "not": {
@@ -421,8 +402,7 @@
                                                     "edge"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
                                 }
                             ]
@@ -475,8 +455,7 @@
                             "message": "cannot have both spec.tls.termination: passthrough and spec.tls.insecureEdgeTerminationPolicy: Allow",
                             "rule": "has(self.termination) && has(self.insecureEdgeTerminationPolicy) ? !((self.termination=='passthrough') && (self.insecureEdgeTerminationPolicy=='Allow')) : true"
                         }
-                    ],
-                    "additionalProperties": false
+                    ]
                 },
                 "to": {
                     "description": "to is an object the route should use as the primary backend. Only the Service kind\nis allowed, and it will be defaulted to Service. If the weight field (0-256 default 100)\nis set to zero, no traffic will be sent to this backend.",
@@ -508,8 +487,7 @@
                         "kind",
                         "name"
                     ],
-                    "type": "object",
-                    "additionalProperties": false
+                    "type": "object"
                 },
                 "wildcardPolicy": {
                     "default": "None",
@@ -531,8 +509,7 @@
                     "message": "header actions are not permitted when tls termination is passthrough.",
                     "rule": "!has(self.tls) || self.tls.termination != 'passthrough' || !has(self.httpHeaders)"
                 }
-            ],
-            "additionalProperties": false
+            ]
         },
         "status": {
             "description": "status is the current state of the route",
@@ -573,8 +550,7 @@
                                         "status",
                                         "type"
                                     ],
-                                    "type": "object",
-                                    "additionalProperties": false
+                                    "type": "object"
                                 },
                                 "type": "array",
                                 "x-kubernetes-list-map-keys": [
@@ -599,21 +575,18 @@
                                 "type": "string"
                             }
                         },
-                        "type": "object",
-                        "additionalProperties": false
+                        "type": "object"
                     },
                     "type": "array",
                     "x-kubernetes-list-type": "atomic"
                 }
             },
-            "type": "object",
-            "additionalProperties": false
+            "type": "object"
         }
     },
     "required": [
         "spec"
     ],
     "type": "object",
-    "additionalProperties": false,
     "$schema": "http://json-schema.org/draft-04/schema#"
 }
