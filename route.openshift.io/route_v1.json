@@ -21,8 +21,7 @@
                                 "path": {
                                     "maxLength": 0
                                 }
-                            },
-                            "additionalProperties": false
+                            }
                         },
                         {
                             "properties": {
@@ -31,8 +30,7 @@
                                         null
                                     ]
                                 }
-                            },
-                            "additionalProperties": false
+                            }
                         },
                         {
                             "not": {
@@ -44,11 +42,9 @@
                                                     "passthrough"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         }
                     ]
@@ -61,8 +57,7 @@
                                     "host": {
                                         "maxLength": 0
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         },
                         {
@@ -73,8 +68,7 @@
                                             "Subdomain"
                                         ]
                                     }
-                                },
-                                "additionalProperties": false
+                                }
                             }
                         }
                     ]
@@ -386,8 +380,7 @@
                                         "key": {
                                             "maxLength": 0
                                         }
-                                    },
-                                    "additionalProperties": false
+                                    }
                                 },
                                 {
                                     "not": {
@@ -397,8 +390,7 @@
                                                     "passthrough"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
                                 }
                             ]
@@ -410,8 +402,7 @@
                                         "destinationCACertificate": {
                                             "maxLength": 0
                                         }
-                                    },
-                                    "additionalProperties": false
+                                    }
                                 },
                                 {
                                     "not": {
@@ -421,8 +412,7 @@
                                                     "edge"
                                                 ]
                                             }
-                                        },
-                                        "additionalProperties": false
+                                        }
                                     }
                                 }
                             ]
